@@ -3,9 +3,6 @@ import datetime
 from schemas.account import Account
 from schemas.card import Card
 from schemas.transaction import Transaction
-from schemas.user import User
-
-from typing import Union
 
 
 class TransactionController:
@@ -13,9 +10,8 @@ class TransactionController:
     @staticmethod
     def create_transaction(
             card: Card,
-            amount: float,
-            timestamp: datetime.datetime) -> Account:
-        transaction = Transaction(card_id=card.id, amount=amount, timestamp=timestamp, appr_status=True)
+            amount: float) -> Account:
+        transaction = Transaction(card_id=card.id, amount=amount, timestamp=datetime.datetime.now(), appr_status=True)
         transaction.save()
         return transaction
 

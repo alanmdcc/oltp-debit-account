@@ -1,5 +1,7 @@
 import datetime
 
+from controllers.card_controller import CardController
+from controllers.transaction_controller import TransactionController
 from schemas.account import Account
 from schemas.card import Card
 from schemas.user import User
@@ -40,6 +42,9 @@ class AccountController:
         balance = account.balance + amount
         account.balance = balance
         account.save()
+        card = CardController.get_card_by_account(account)
+        transaction = TransactionController.create_transaction(card, amount)
+        transaction.save()
         print('Deposit completed')
         print(f'Updated balance: {account.balance}')
         return True
@@ -50,6 +55,9 @@ class AccountController:
         if balance >= 0:
             account.balance = balance
             account.save()
+            card = CardController.get_card_by_account(account)
+            transaction = TransactionController.create_transaction(card, -amount)
+            transaction.save()
             print('Withdraw completed')
             print(f'Updated balance: {account.balance}')
             return True
