@@ -16,6 +16,7 @@ class AccountController:
             user: User,
             balance: float,
             open_date: datetime.datetime) -> Account:
+        assert balance >= 0, 'Balance must be positive'
         account = Account(user_id=user.id, balance=balance, open_date=open_date)
         account.save()
         return account
