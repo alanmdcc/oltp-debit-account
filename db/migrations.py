@@ -10,7 +10,8 @@ from schemas.user import User
 
 
 def create_db(path: str):
-    os.remove(path)
+    if os.path.isfile(path):
+        os.remove(path)
     db = SqliteDatabase(path)
     time.sleep(1)
     db.create_tables([User, Account, Card, Transaction])
