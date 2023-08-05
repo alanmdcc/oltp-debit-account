@@ -14,9 +14,8 @@ class TransactionController:
     def create_transaction(
             card: Card,
             amount: float,
-            timestamp: datetime.datetime,
-            appr_status: bool) -> Account:
-        transaction = Transaction(card_id=card.id, amount=amount, timestamp=timestamp, appr_status=appr_status)
+            timestamp: datetime.datetime) -> Account:
+        transaction = Transaction(card_id=card.id, amount=amount, timestamp=timestamp, appr_status=True)
         transaction.save()
         return transaction
 
