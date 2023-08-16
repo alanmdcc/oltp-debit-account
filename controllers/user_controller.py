@@ -30,7 +30,10 @@ class UserController:
     # delete
     @staticmethod
     def delete_user(user: User):
-        account = AccountController.get_account_by_user(user)
+        try:
+            account = user.get(user_id=user.id)
+        except:
+            account = None
 
         if account is None:
             print(f'User with ID={user.id} was deleted')
